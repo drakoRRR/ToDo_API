@@ -17,7 +17,7 @@ class Task(models.Model):
 
     title = models.CharField(max_length=256, blank=False)
     description = models.TextField(blank=True)
-    date = models.DateTimeField(auto_now_add=True)
+    posted_date = models.DateTimeField(auto_now_add=True)
     deadline_date = models.DateField(blank=False)
     completed = models.BooleanField(default=False)
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
