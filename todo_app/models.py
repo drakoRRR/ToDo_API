@@ -6,7 +6,7 @@ from django.db import models
 class Category(models.Model):
     '''Model for category's for tasks'''
 
-    name = models.CharField(max_length=256, unique=True)
+    name = models.CharField(max_length=256)
 
     def __str__(self):
         return self.name
