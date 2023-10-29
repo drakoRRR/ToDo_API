@@ -21,9 +21,9 @@ env = environ.Env(
 
     MYSQL_DATABASE=(str),
     MYSQL_USER=(str),
-    MYSQL_PASSWORD=(int),
+    MYSQL_PASSWORD=(str),
     DB_HOST=(str),
-    DB_PORT=(int),
+    DB_PORT=(str),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
