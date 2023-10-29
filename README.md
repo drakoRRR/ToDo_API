@@ -1,3 +1,4 @@
+![logo](media_for_readme/logo/logo_api.jpg)
 # ToDo API
 
 This project was initiated for educational purposes, with the primary objective being to delve deeper into 
@@ -11,6 +12,7 @@ technologies such as Django, Django Rest Framework, MySQL, and Docker
 
 # Database(MySQL)
 ![db](media_for_readme/db_image/db_image.png)
+
 Our project has 2 self-written models
 
 # API
