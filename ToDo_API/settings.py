@@ -18,6 +18,12 @@ import environ
 env = environ.Env(
     DEBUG=(bool),
     SECRET_KEY=(str),
+
+    MYSQL_DATABASE=(str),
+    MYSQL_USER=(str),
+    MYSQL_PASSWORD=(int),
+    DB_HOST=(str),
+    DB_PORT=(int),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,9 +97,9 @@ WSGI_APPLICATION = 'ToDo_API.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
+        'NAME': env('MYSQL_DATABASE'),
+        'USER': env('MYSQL_USER'),
+        'PASSWORD': env('MYSQL_PASSWORD'),
         'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
     }
