@@ -1,22 +1,41 @@
 from rest_framework import viewsets
 from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, CreateAPIView, DestroyAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from todo_app.models import Task, Category
-from todo_app.permissions import IsOwnerOrReadOnly
+from todo_app.permissions import IsOwner
 from todo_app.serializers import TaskSerializer, CategorySerializer
 
 
 # Create your views here.
 class TaskView(ListAPIView):
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
+
+class TaskSortedCategoryView(ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user).filter(category_id=self.kwargs['category_id'])
+
+
+class TaskSortedCompletedView(ListAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user).filter(completed=True)
 
 
 class TaskUpdateView(RetrieveUpdateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsOwner, )
 
 
 class CreateTaskView(CreateAPIView):
@@ -27,7 +46,7 @@ class CreateTaskView(CreateAPIView):
 class DeleteTaskView(DestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsOwner,)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
